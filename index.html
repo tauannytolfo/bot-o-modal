@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Segurança Digital - Acessível</title>
+    
+    <!-- 
+      BLOCO DE ESTILOS CSS 
+      Podes copiar todo o conteúdo abaixo para um ficheiro separado chamado "style.css"
+    -->
+    <style>
+        /* Paleta de cores baseada na imagem fornecida */
+        :root {
+            --dark-blue: #003B73;
+            --accent-yellow: #FFC000;
+            --emergency-red: #D00000;
+            --card-bg: #EFF4F9;
+            --text-dark: #1A1A1A;
+            --text-muted: #4A4A4A;
+            --white: #FFFFFF;
+            --font-scale: 1.0;
+        }
+
+        /* Modo de Alto Contraste para melhor leitura */
+        .alto-contraste {
+            --dark-blue: #000000;
+            --accent-yellow: #FFFF00;
+            --emergency-red: #FF0000;
+            --card-bg: #121212;
+            --text-dark: #FFFFFF;
+            --text-muted: #DDDDDD;
+            --white: #000000;
+        }
+
+        /* Reset Geral e Acessibilidade */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: calc(18px * var(--font-scale));
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.2s, color 0.2s;
+            padding-bottom: 80px;
+        }
+
+        /* Barra de Acessibilidade Superior */
+        .barra-acessibilidade {
+            background-color: #1A1A1A;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .grupo-botoes-acessibilidade {
+            display: flex;
+            gap: 10px;
+        }
+
+        .botao-acessibilidade {
+            background-color: #333333;
+            color: #FFFFFF;
+            border: 2px solid #555555;
+            padding: 8px 16px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .botao-acessibilidade:hover,
+        .botao-acessibilidade:focus {
+            background-color: var(--accent-yellow);
+            color: #000000;
+            outline: 3px solid #FFFFFF;
+        }
+
+        /* Cabeçalho do Aplicativo */
+        header {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 6px solid var(--accent-yellow);
+        }
+
+        header h1 {
+            font-size: calc(2.2rem * var(--font-scale));
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: calc(1.2rem * var(--font-scale));
+            opacity: 0.9;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Botão de Emergência (Gatilho do Modal) */
+        .btn-emergencia {
+            display: inline-block;
+            background-color: var(--emergency-red);
+            color: var(--white);
+            font-size: calc(1.25rem * var(--font-scale));
+            font-weight: bold;
+            padding: 18px 40px;
+            border: 4px solid var(--white);
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        .btn-emergencia:hover, 
+        .btn-emergencia:focus {
+            background-color: #B00000;
+            transform: scale(1.03);
+            outline: 4px solid var(--accent-yellow);
+        }
+
+        /* Conteúdo Principal */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Secções */
+        .titulo-seccao {
+            font-size: calc(1.7rem * var(--font-scale));
+            color: var(--dark-blue);
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alto-contraste .titulo-seccao {
+            color: var(--accent-yellow);
+        }
+
+        .linha-decorativa {
+            height: 4px;
+            background-color: var(--accent-yellow);
+            width: 100%;
+            margin-bottom: 30px;
+            border-radius: 2px;
+        }
+
+        /* Lista de Dicas */
+        .lista-dicas {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        /* Cartões de Dica */
+        .cartao-dica {
+            background-color: var(--card-bg);
+            border-left: 10px solid var(--dark-blue);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .alto-contraste .cartao-dica {
+            border: 2px solid #FFFFFF;
+            border-left: 10px solid var(--accent-yellow);
+        }
+
+        .cartao-dica:hover,
+        .cartao-dica:focus-within {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            outline: 3px solid var(--dark-blue);
+        }
+
+        .numero-dica {
+            font-size: calc(1.4rem * var(--font-scale));
+            font-weight: bold;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .alto-contraste .numero-dica {
+            color: var(--accent-yellow);
+        }
+
+        .texto-dica {
+            font-size: calc(1.15rem * var(--font-scale));
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .exemplo-dica {
+            background-color: rgba(0, 59, 115, 0.06);
+            border-left: 4px solid var(--accent-yellow);
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .alto-contraste .exemplo-dica {
+            background-color: #222222;
+        }
+
+        /* Botão para Ouvir Texto */
+        .btn-ouvir {
+            background-color: var(--white);
+            color: var(--dark-blue);
+            border: 2px solid var(--dark-blue);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .alto-contraste .btn-ouvir {
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
+        }
+
+        .btn-ouvir:hover,
+        .btn-ouvir:focus {
+            background-color: var(--dark-blue);
+            color: var(--white);
+        }
+
+        /* Secção de Exercício Prático (Quiz) */
+        .seccao-quiz {
+            background-color: var(--card-bg);
+            border: 3px solid var(--accent-yellow);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .pergunta-quiz {
+            font-size: calc(1.25rem * var(--font-scale));
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .opcao-quiz {
+            display: block;
+            width: 100%;
+            background-color: var(--white);
+            border: 2px solid #CCCCCC;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: calc(1.1rem * var(--font-scale));
+            font-weight: bold;
+            text-align: left;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .opcao-quiz:hover,
+        .opcao-quiz:focus {
+            background-color: #E8F0FE;
+            border-color: var(--dark-blue);
+            outline: none;
+        }
+
+        .resposta-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: none;
+        }
+
+        /* MODAL DE EMERGÊNCIA */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            color: var(--text-dark);
+            border: 5px solid var(--emergency-red);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-height: 90vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            background-color: var(--emergency-red);
+            color: var(--white);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: calc(1.5rem * var(--font-scale));
+            font-weight: bold;
+        }
+
+        .btn-fechar-modal {
+            background-color: var(--white);
+            color: var(--emergency-red);
+            border: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn-fechar-modal:hover {
+            background-color: #333;
+            color: #FFF;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .instrucao-modal {
+            font-size: calc(1.2rem * var(--font-scale));
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Lista de contactos no modal */
+        .lista-contactos {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .item-contacto {
+            background-color: var(--card-bg);
+            border: 2px solid #CCCCCC;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alto-contraste .item-contacto {
+            border-color: #FFFF00;
+        }
+
+        .info-contacto h4 {
+            font-size: calc(1.2rem * var(--font-scale));
+            color: var(--emergency-red);
+            margin-bottom: 4px;
+        }
+
+        .info-contacto p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .btn-ligar {
+            background-color: #2E7D32;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: calc(1.1rem * var(--font-scale));
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+        }
+
+        .btn-ligar:hover {
+            background-color: #1B5E20;
+        }
+
+        /* Guia rápido no modal */
+        .guia-rapido {
+            background-color: rgba(208, 0, 0, 0.05);
+            border-left: 5px solid var(--emergency-red);
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .alto-contraste .guia-rapido {
+            background-color: #222;
+        }
+
+        .guia-rapido h5 {
+            font-size: 1.15rem;
+            color: var(--emergency-red);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .guia-rapido ol {
+            padding-left: 20px;
+        }
+
+        .guia-rapido li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.95rem;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+      ESTRUTURA HTML PRINCIPAL
+    -->
+
+    <!-- BARRA DE ACESSIBILIDADE -->
+    <nav class="barra-acessibilidade" aria-label="Controlos de Acessibilidade">
+        <div class="grupo-botoes-acessibilidade">
+            <button class="botao-acessibilidade" onclick="alterarTamanhoFonte(1)" aria-label="Aumentar o tamanho da letra">A+ Aumentar Letra</button>
+            <button class="botao-acessibilidade" onclick="alterarTamanhoFonte(-1)" aria-label="Diminuir o tamanho da letra">A- Diminuir Letra</button>
+        </div>
+        <button class="botao-acessibilidade" onclick="alternarContraste()" aria-label="Ativar ou desativar o modo de alto contraste">Preto e Branco / Contraste</button>
+    </nav>
+
+    <!-- CABEÇALHO -->
+    <header role="banner">
+        <h1>Guia de Segurança Digital</h1>
+        <p>Aprenda a proteger-se de forma simples e navegue pela internet com total confiança!</p>
+        <button class="btn-emergencia" onclick="abrirModal()" aria-haspopup="dialog" aria-controls="modalEmergencia">
+            🚨 PRECISO DE AJUDA AGORA
+        </button>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main role="main">
+        
+        <!-- SECÇÃO DE DICAS -->
+        <section aria-labelledby="seccao-dicas">
+            <h2 id="seccao-dicas" class="titulo-seccao">Dicas de Segurança Práticas</h2>
+            <div class="linha-decorativa"></div>
+            
+            <div class="lista-dicas">
+                
+                <!-- Dica 1 -->
+                <article class="cartao-dica" tabindex="0">
+                    <div class="numero-dica" id="dica1-titulo">1. Crie senhas difíceis de adivinhar</div>
+                    <p class="texto-dica" id="dica1-corpo">Evite datas de aniversário, nomes de animais de estimação ou sequências fáceis como "12345". Utilize frases longas que façam sentido apenas para si.</p>
+                    <div class="exemplo-dica" id="dica1-exemplo">
+                        <strong>Exemplo Seguro:</strong> "AdoroComerBacalhauComNatas2026!"
+                    </div>
+                    <button class="btn-ouvir" onclick="lerTexto('dica1-titulo', 'dica1-corpo', 'dica1-exemplo')" aria-label="Ouvir a dica número 1 em voz alta">
+                        🔊 Ouvir Dica
+                    </button>
+                </article>
+
+                <!-- Dica 2 -->
+                <article class="cartao-dica" tabindex="0">
+                    <div class="numero-dica" id="dica2-titulo">2. Desconfie de pedidos de dinheiro urgentes</div>
+                    <p class="texto-dica" id="dica2-corpo">Se algum familiar ou conhecido lhe pedir dinheiro emprestado à pressa pelo WhatsApp (dizendo que mudou de número), não faça qualquer transferência. Ligue para o número antigo dele primeiro para confirmar.</p>
+                    <div class="exemplo-dica" id="dica2-exemplo">
+                        <strong>Lembre-se:</strong> Os burlões usam a pressa e a preocupação para nos enganar.
+                    </div>
+                    <button class="btn-ouvir" onclick="lerTexto('dica2-titulo', 'dica2-corpo', 'dica2-exemplo')" aria-label="Ouvir a dica número 2 em voz alta">
+                        🔊 Ouvir Dica
+                    </button>
+                </article>
+
+                <!-- Dica 3 -->
+                <article class="cartao-dica" tabindex="0">
+                    <div class="numero-dica" id="dica3-titulo">3. Não clique em links desconhecidos</div>
+                    <p class="texto-dica" id="dica3-corpo">Mensagens SMS ou emails que dizem que ganhou um prémio, que tem uma encomenda presa nos CTT, ou que a sua conta do banco vai ser bloqueada são quase sempre mentira. Não clique em nada.</p>
+                    <div class="exemplo-dica" id="dica3-exemplo">
+                        <strong>Dica de Ouro:</strong> Os bancos e as autoridades nunca pedem dados pessoais ou códigos por SMS.
+                    </div>
+                    <button class="btn-ouvir" onclick="lerTexto('dica3-titulo', 'dica3-corpo', 'dica3-exemplo')" aria-label="Ouvir a dica número 3 em voz alta">
+                        🔊 Ouvir Dica
+                    </button>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- SECÇÃO DE JOGO / SIMULADOR -->
+        <section class="seccao-quiz" aria-labelledby="titulo-jogo">
+            <h3 id="titulo-jogo" class="titulo-seccao" style="font-size: 1.4rem;">🎯 Teste o seu Conhecimento!</h3>
+            <div class="linha-decorativa" style="margin-bottom: 20px;"></div>
+            
+            <p class="pergunta-quiz">Recebe uma mensagem no telemóvel a dizer que a sua conta bancária está em risco e que deve clicar num link para a salvar. O que faz?</p>
+            
+            <button class="opcao-quiz" onclick="verificarQuiz(false, this)">
+                A) Carrego no link rapidamente para resolver o problema logo.
+            </button>
+            <button class="opcao-quiz" onclick="verificarQuiz(true, this)">
+                B) Não clico. Apago a mensagem e ligo diretamente para o meu banco ou gerente.
+            </button>
+
+            <div id="resultadoQuiz" class="resposta-feedback"></div>
+        </section>
+
+    </main>
+
+    <!-- MODAL DE EMERGÊNCIA (Escondido por padrão) -->
+    <div id="modalEmergencia" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle" class="modal-title">🚨 Linhas de Apoio Direto</h3>
+                <button class="btn-fechar-modal" onclick="fecharModal()" aria-label="Fechar janela de emergência">Fechar X</button>
+            </div>
+            
+            <div class="modal-body">
+                <p class="instrucao-modal">Se foi vítima de uma fraude ou precisa de apoio imediato, ligue para as seguintes entidades:</p>
+                
+                <div class="lista-contactos">
+                    <!-- Linha Nacional de Emergência -->
+                    <div class="item-contacto">
+                        <div class="info-contacto">
+                            <h4>Polícia / Emergência (PT)</h4>
+                            <p>Número europeu para socorro imediato.</p>
+                        </div>
+                        <a href="tel:112" class="btn-ligar" aria-label="Ligar para o 112">📞 Ligar 112</a>
+                    </div>
+
+                    <!-- Linha de Apoio ao Cidadão / Fraudes -->
+                    <div class="item-contacto">
+                        <div class="info-contacto">
+                            <h4>GNR / PSP (Contra a Fraude)</h4>
+                            <p>Para denunciar burla informática.</p>
+                        </div>
+                        <a href="tel:214444444" class="btn-ligar" style="background-color: #003B73;" aria-label="Ligar para apoio contra fraudes">📞 Ligar Polícia</a>
+                    </div>
+
+                    <!-- Familiar / Pessoa de Confiança -->
+                    <div class="item-contacto">
+                        <div class="info-contacto">
+                            <h4>Contacto de Confiança</h4>
+                            <p>Ligue para o seu familiar ou vizinho de apoio.</p>
+                        </div>
+                        <a href="tel:+351900000000" class="btn-ligar" style="background-color: #6A1B9A;" aria-label="Ligar para familiar de confiança">📞 Ligar Família</a>
+                    </div>
+                </div>
+
+                <!-- Guia Rápido Pós-Golpe -->
+                <div class="guia-rapido">
+                    <h5>⚠️ O que fazer imediatamente se caiu num golpe?</h5>
+                    <ol>
+                        <li><strong>Contacte o seu Banco imediatamente:</strong> Peça para cancelar os seus cartões e bloquear transferências bancárias recentes.</li>
+                        <li><strong>Tire capturas de ecrã (prints):</strong> Guarde as mensagens e o comprovativo de envio de dinheiro.</li>
+                        <li><strong>Faça queixa na Polícia:</strong> Vá ao posto da GNR, PSP ou Polícia Judiciária para registar a ocorrência.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer role="contentinfo">
+        <p>Criado com carinho para ajudar a manter a nossa comunidade sénior em segurança. ❤️</p>
+    </footer>
+
+    <!-- 
+      LÓGICA JAVASCRIPT
+    -->
+    <script>
+        // Variável de controle da escala da fonte
+        let escalaFonte = 1.0;
+
+        // Função para aumentar ou diminuir a letra
+        function alterarTamanhoFonte(direcao) {
+            escalaFonte += direcao * 0.1;
+            // Limitar o tamanho da letra para não quebrar excessivamente o layout
+            if (escalaFonte < 0.9) escalaFonte = 0.9;
+            if (escalaFonte > 1.5) escalaFonte = 1.5;
+            document.documentElement.style.setProperty('--font-scale', escalaFonte);
+        }
+
+        // Função para alternar o modo de alto contraste
+        function alternarContraste() {
+            document.body.classList.toggle('alto-contraste');
+        }
+
+        // Abrir o Modal de Emergência
+        function abrirModal() {
+            document.getElementById('modalEmergencia').style.display = 'flex';
+            // Focar o botão de fechar para leitores de ecrã
+            setTimeout(() => {
+                document.querySelector('.btn-fechar-modal').focus();
+            }, 100);
+        }
+
+        // Fechar o Modal
+        function fecharModal() {
+            document.getElementById('modalEmergencia').style.display = 'none';
+            document.querySelector('.btn-emergencia').focus();
+        }
+
+        // Fechar o modal se o utilizador clicar fora da caixa branca
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalEmergencia');
+            if (event.target == modal) {
+                fecharModal();
+            }
+        }
+
+        // Função para ler o texto em voz alta (Web Speech API)
+        function lerTexto(idTitulo, idCorpo, idExemplo) {
+            if ('speechSynthesis' in window) {
+                // Cancela leituras que estejam a decorrer
+                window.speechSynthesis.cancel();
+
+                const titulo = document.getElementById(idTitulo).innerText;
+                const corpo = document.getElementById(idCorpo).innerText;
+                const exemplo = document.getElementById(idExemplo).innerText;
+
+                const textoCompleto = `${titulo}. ${corpo}. Exemplo prático: ${exemplo}`;
+                
+                const discurso = new SpeechSynthesisUtterance(textoCompleto);
+                discurso.lang = 'pt-PT'; // Configurado para Português de Portugal
+                discurso.rate = 0.85; // Velocidade ligeiramente mais lenta para compreensão perfeita
+
+                window.speechSynthesis.speak(discurso);
+            } else {
+                alert("Pedimos desculpa, mas o seu navegador não suporta a leitura de texto por voz.");
+            }
+        }
+
+        // Validação da Resposta do Jogo Prático
+        function verificarQuiz(respostaCorreta, botaoClicado) {
+            const feedback = document.getElementById('resultadoQuiz');
+            feedback.style.display = 'block';
+
+            if (respostaCorreta) {
+                feedback.style.backgroundColor = '#D4EDDA';
+                feedback.style.color = '#155724';
+                feedback.innerHTML = "✅ Excelente escolha! Nunca deve clicar em links enviados por SMS ou WhatsApp em nome de bancos. Os bancos oficiais usam as suas próprias aplicações e nunca fazem avisos alarmantes por mensagens escritas.";
+            } else {
+                feedback.style.backgroundColor = '#F8D7DA';
+                feedback.style.color = '#721C24';
+                feedback.innerHTML = "❌ Atenção! Clicar no link é muito perigoso. Os burlões usam links falsos para aceder à sua conta e roubar o seu dinheiro. O comportamento seguro é nunca clicar e contactar o banco diretamente.";
+            }
+        }
+    </script>
+</body>
+</html>
